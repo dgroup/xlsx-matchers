@@ -1,0 +1,31 @@
+#
+# Get started for java:   https://circleci.com/docs/2.0/language-java
+# Circleci docker & java: https://circleci.com/docs/2.0/building-docker-images
+# Environment variables:  https://circleci.com/docs/2.0/env-vars
+# Verify circleci *.yml:  https://circleci.com/docs/2.0/local-cli
+#
+version: 2
+jobs:
+  assemble_jar:
+    docker:
+    - image: maven:3.6.0-jdk-8
+    environment:
+      MAVEN_OPTS: |
+        -Xmx256m
+        -Dorg.slf4j.simpleLogger.dateTimeFormat=HH:mm:ss,SSS
+        -Dorg.slf4j.simpleLogger.showDateTime=true
+      JAVA_HOME: "/docker-java-home"
+    steps:
+    - checkout
+    - run:
+        name: Build java sources (including integration tests)
+        command: |
+          mvn -P qulice,integration-tests clean install -DLL.yandex.user=${EMAIL_USER} -DLL.yandex.pass=${EMAIL_PASS} -DLL.yandex.to.user=${EMAIL_TO}
+          mvn -Psonar sonar:sonar -Dsonar.organization=dgroup-github -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${SONAR_LOGIN}
+          bash <(curl -s https://codecov.io/bash)
+
+workflows:
+  version: 2
+  build:
+    jobs:
+    - assemble_jar
