@@ -28,17 +28,20 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
-import org.apache.poi.xssf.usermodel.XSSFCreationHelper;
 import org.cactoos.Scalar;
 import org.cactoos.scalar.Sticky;
 
 /**
  * The excel cell with date.
  *
- * @since 3.14.9
+ * @since 0.1.0
  */
 public final class DateOf extends CellOf<LocalDate> {
 
+    /**
+     * Ctor.
+     * @param cell The Apache POI cell.
+     */
     public DateOf(final XSSFCell cell) {
         this(
             cell::getColumnIndex,
@@ -49,27 +52,57 @@ public final class DateOf extends CellOf<LocalDate> {
         );
     }
 
+    /**
+     * Ctor.
+     * @param cid The number of excel cell.
+     * @param val The excel cell value.
+     */
     public DateOf(final int cid, final LocalDate val) {
         this(() -> cid, () -> val);
     }
 
+    /**
+     * Ctor.
+     * @param cid The number of excel cell.
+     * @param val The excel cell value.
+     */
     public DateOf(final String cid, final LocalDate val) {
         this(cid, () -> val);
     }
 
+    /**
+     * Ctor.
+     * @param cid The number of excel cell.
+     * @param val The excel cell value.
+     */
     public DateOf(final String cid, final Scalar<LocalDate> val) {
         this(new Sticky<>(new IndexOf(cid)), val);
     }
 
+    /**
+     * Ctor.
+     * @param cid The number of excel cell.
+     * @param val The excel cell value.
+     */
     public DateOf(final Scalar<Integer> cid, final Scalar<LocalDate> val) {
         this(cid, val, "yyyy-mm-dd");
     }
 
+    /**
+     * Ctor.
+     * @param cid The number of excel cell.
+     * @param val The excel cell value.
+     * @param pattern The format of the date for target {@link XSSFCell}.
+     */
     public DateOf(final Scalar<Integer> cid, final Scalar<LocalDate> val, final String pattern) {
         super(cid, val, sheet -> {
-            final XSSFCreationHelper creationHelper = sheet.getWorkbook().getCreationHelper();
             final XSSFCellStyle date = sheet.getWorkbook().createCellStyle();
-            date.setDataFormat(creationHelper.createDataFormat().getFormat(pattern));
+            date.setDataFormat(
+                sheet.getWorkbook()
+                    .getCreationHelper()
+                    .createDataFormat()
+                    .getFormat(pattern)
+            );
             return date;
         });
     }

@@ -40,11 +40,13 @@ public final class IndexOf implements Scalar<Integer> {
      * Count of symbols within English alphabet.
      */
     private static final int ENGLISH_ALPHABET = 26;
+
     /**
      * First excel columns has index starting from 0,
-     *  thus alphabet should start from 'symbol - 1'
+     *  thus alphabet should start from 'symbol - 1'.
      */
     private static final int EXCEL_INDEX_SHIFT = 1;
+
     /**
      * The label of excel column.
      */
@@ -52,7 +54,7 @@ public final class IndexOf implements Scalar<Integer> {
 
     /**
      * Ctor.
-     * @param column
+     * @param column The label of excel column like 'A', 'Z', 'AX', etc.
      */
     public IndexOf(final String column) {
         this.column = column;
@@ -61,9 +63,9 @@ public final class IndexOf implements Scalar<Integer> {
     @Override
     public Integer value() {
         int result = 0;
-        for (int i = 0; i < column.length(); i++) {
+        for (int idx = 0; idx < this.column.length(); ++idx) {
             result *= IndexOf.ENGLISH_ALPHABET;
-            result += column.charAt(i) - 'A' + 1;
+            result += this.column.charAt(idx) - 'A' + 1;
         }
         return result - IndexOf.EXCEL_INDEX_SHIFT;
     }

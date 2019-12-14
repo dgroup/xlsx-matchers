@@ -1,0 +1,43 @@
+gitstrap:
+    version: v1
+    github:
+        repo:
+            # github repository name (optional, current directory name if empty)
+            name: xlsx-matchers
+            # github repository description
+            description: "Elegant object-oriented hamcrest matchers for Apache POI"
+            # true if private (optional, default false) 
+            private: false
+            # github webhooks
+            hooks:
+                  # webhook url
+                - url: "http://p.rehttp.net/http://www.0pdd.com/hook/github"
+                  # webhook type: form or json
+                  type: form
+                  # events to send (see github docs)
+                  events:
+                      - push
+                  # false to create webhook in inactive state (optional, default true) 
+                  active: true
+            # github logins to add as collaborators
+            collaborators:
+                - "rultor"
+                - "0pdd"
+    # (optional) templates to apply, see Templates README section
+    templates:
+          # file name in repository
+        - name: "readme.md"
+          # template url
+          url: "https://raw.githubusercontent.com/g4s8/gitstrap/master/templates/README.md"
+        - name: "license"
+          url: "https://raw.githubusercontent.com/dgroup/gitstrap-templates/master/license"
+    # (optional) these params can be accessed from template, just a key-value pairs
+    params:
+        rultor: true
+        travis: true
+        readmeContrib: |
+            Fork repository, clone it, make changes,
+            push to new branch and submit a pull request.
+        pdd: true
+        license: MIT
+        package: io.github.dgroup

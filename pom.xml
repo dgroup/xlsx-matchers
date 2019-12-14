@@ -111,12 +111,6 @@
     </dependency>
     <!-- @todo #/DEV Upgrade the hamcrest-all library to the latest release of hamcrest-java -->
     <dependency>
-      <groupId>org.hamcrest</groupId>
-      <artifactId>hamcrest-all</artifactId>
-      <version>${hamcrest-all.version}</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
       <groupId>org.llorllale</groupId>
       <artifactId>cactoos-matchers</artifactId>
       <version>${cactoos-matchers.version}</version>
@@ -132,12 +126,6 @@
       <groupId>org.apache.poi</groupId>
       <artifactId>poi-ooxml</artifactId>
       <version>${poi.version}</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.poi</groupId>
-      <artifactId>ooxml-schemas</artifactId>
-      <version>${ooxml-schemas.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>

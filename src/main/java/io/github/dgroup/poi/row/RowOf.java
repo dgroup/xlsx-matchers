@@ -36,19 +36,34 @@ import org.cactoos.scalar.Unchecked;
  *
  * @see XSSFSheet
  * @see XSSFRow
- *
- * @since 3.4.0
+ * @since 0.1.0
  */
 public final class RowOf implements MutableRow {
 
+    /**
+     * The Apache POI sheet.
+     */
     private final XSSFSheet sheet;
 
+    /**
+     * The excel index of particular row.
+     */
     private final Unchecked<Integer> rowid;
 
+    /**
+     * Ctor.
+     * @param sheet The Apache POI sheet.
+     * @param rowid The excel index of particular row.
+     */
     public RowOf(final XSSFSheet sheet, final AtomicInteger rowid) {
         this(sheet, rowid::get);
     }
 
+    /**
+     * Ctor.
+     * @param sheet The Apache POI sheet.
+     * @param rowid The excel index of particular row.
+     */
     public RowOf(final XSSFSheet sheet, final Scalar<Integer> rowid) {
         this.sheet = sheet;
         this.rowid = new Unchecked<>(rowid);

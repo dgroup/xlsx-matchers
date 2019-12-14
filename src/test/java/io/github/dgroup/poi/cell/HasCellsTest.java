@@ -24,27 +24,42 @@
 
 package io.github.dgroup.poi.cell;
 
-import org.cactoos.Scalar;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.junit.Test;
+import org.llorllale.cactoos.matchers.Assertion;
+import org.llorllale.cactoos.matchers.Matches;
 
 /**
- * The excel cell.
- *
- * @param <T> The type of excel cell.
- * @see CellOf
+ * Test case for {@link HasCells}.
  *
  * @since 0.1.0
+ * @checkstyle MethodBodyCommentsCheck (500 lines)
  */
-public interface Cell<T> extends Scalar<T> {
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
+public class HasCellsTest {
 
-    /**
-     * The cell column id (starts from 0).
-     * @return The column id.
-     */
-    int index();
+    @Test
+    public void matches() {
+        // Testing prerequisites
+        final XSSFRow row = new XSSFWorkbook().createSheet().createRow(1);
+        final XSSFCell name = row.createCell(0);
+        name.setCellValue("Name");
+        final XSSFCell birth = row.createCell(1);
+        birth.setCellValue("Birth");
+        final XSSFCell phone = row.createCell(2);
+        phone.setCellValue("Phone");
+        // Testing ...
+        new Assertion<>(
+            "The mather matches row with all required cells",
+            new HasCells<>(
+                new CellOf<>(0, "Name"),
+                new CellOf<>(1, "Birth"),
+                new CellOf<>(2, "Phone")
+            ),
+            new Matches<>(row)
+        ).affirm();
+    }
 
-    /**
-     * The cell value.
-     * @return The value.
-     */
-    T value();
 }

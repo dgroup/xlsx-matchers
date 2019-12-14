@@ -30,9 +30,13 @@ import org.cactoos.Scalar;
 /**
  * A singe excel row.
  *
- * @since 3.4.0
+ * @since 0.1.0
  */
 public interface Row extends Scalar<XSSFRow> {
 
+    /**
+     * The Apache POI row.
+     * @return The row.
+     */
     XSSFRow value();
 }

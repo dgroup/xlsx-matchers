@@ -26,6 +26,7 @@ package io.github.dgroup.poi.cell;
 
 import com.tngtech.java.junit.dataprovider.DataProvider;
 import com.tngtech.java.junit.dataprovider.DataProviderRunner;
+import com.tngtech.java.junit.dataprovider.UseDataProvider;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.llorllale.cactoos.matchers.Assertion;
@@ -41,6 +42,7 @@ import org.llorllale.cactoos.matchers.ScalarHasValue;
 public class IndexOfTest {
 
     @Test
+    @UseDataProvider("columns")
     public void index(final String scenario, final String column, final int index) {
         new Assertion<>(
             scenario,
@@ -57,7 +59,8 @@ public class IndexOfTest {
      * @return The bulk test data.
      */
     @DataProvider
-    public Object[][] columns() {
+    @SuppressWarnings("PMD.ProhibitPublicStaticMethods")
+    public static Object[][] columns() {
         return new Object[][]{
             {"The column 'A' in excel has '0' index", "A", 0},
             {"The column 'F' in excel has '5' index", "F", 5},

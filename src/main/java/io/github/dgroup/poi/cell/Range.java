@@ -24,7 +24,6 @@
 
 package io.github.dgroup.poi.cell;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -39,13 +38,27 @@ import org.cactoos.text.Joined;
 /**
  * Cells range which starts from the particular excel column number.
  *
- * @since 3.4.0
+ * @param <T> The type of excel cell(s) value.
+ * @since 0.1.0
+ * @checkstyle ClassDataAbstractionCouplingCheck (200 lines)
  */
 public final class Range<T> implements MutableCell<List<T>> {
 
+    /**
+     * The Apache POI index of excel cell.
+     * By default the cell index starts from 0.
+     */
+    private final Unchecked<Integer> cid;
+
+    /**
+     * The range of values for excel cells.
+     */
     private final List<T> values;
 
-    private final Unchecked<Integer> cid;
+    /**
+     * The function to evaluate the cell description.
+     */
+    private final Unchecked<String> tostr;
 
     /**
      * Ctor.
@@ -71,7 +84,7 @@ public final class Range<T> implements MutableCell<List<T>> {
      * @param values The cell(s) values.
      */
     public Range(final String cid, final T... values) {
-        this(cid, Arrays.asList(values));
+        this(cid, new ListOf<>(values));
     }
 
     /**
@@ -91,11 +104,20 @@ public final class Range<T> implements MutableCell<List<T>> {
     public Range(final Scalar<Integer> cid, final List<T> values) {
         this.cid = new Unchecked<>(cid);
         this.values = values;
+        this.tostr = new Unchecked<>(
+            new Sticky<>(
+                () -> String.format(
+                    "Cell(s) starting from %s, %s.",
+                    this.cid,
+                    new Joined(",", new Mapped<>(Object::toString, this.values))
+                )
+            )
+        );
     }
 
     @Override
     public void change(final XSSFRow row) {
-        final AtomicInteger column = new AtomicInteger(this.id());
+        final AtomicInteger column = new AtomicInteger(this.index());
         for (final T val : this.values) {
             new CellOf<>(column.getAndIncrement(), val)
                 .change(row);
@@ -103,7 +125,7 @@ public final class Range<T> implements MutableCell<List<T>> {
     }
 
     @Override
-    public int id() {
+    public int index() {
         return this.cid.value();
     }
 
@@ -113,12 +135,8 @@ public final class Range<T> implements MutableCell<List<T>> {
     }
 
     @Override
-    public final String toString() {
-        return String.format(
-            "Cell(s) starting from %s, %s.",
-            this.cid,
-            new Joined(",", new Mapped<>(Object::toString, this.values))
-        );
+    public String toString() {
+        return this.tostr.value();
     }
 
     @Override
@@ -130,7 +148,7 @@ public final class Range<T> implements MutableCell<List<T>> {
             equal = false;
         } else {
             final Cell<?> that = (Cell<?>) obj;
-            equal = Objects.equals(this.id(), that.id())
+            equal = Objects.equals(this.index(), that.index())
                 && Objects.equals(this.value(), that.value());
         }
         return equal;

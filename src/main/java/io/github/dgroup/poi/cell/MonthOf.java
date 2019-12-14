@@ -32,7 +32,7 @@ import org.cactoos.scalar.Sticky;
 /**
  * The excel cell with month.
  *
- * @since 3.9.0
+ * @since 0.1.0
  */
 public final class MonthOf extends CellOf<String> {
 

@@ -29,6 +29,7 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 /**
  * An excel cell which may change the cell value for particular row.
  *
+ * @param <T> The type of excel cell.
  * @since 0.1.0
  */
 public interface MutableCell<T> extends Cell<T> {
@@ -37,5 +38,5 @@ public interface MutableCell<T> extends Cell<T> {
      * Change the cell value based on type.
      * @param row Excel row to modify.
      */
-    void change(final XSSFRow row);
+    void change(XSSFRow row);
 }
