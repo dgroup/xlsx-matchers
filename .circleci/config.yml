@@ -21,8 +21,8 @@ jobs:
         name: Build java sources (including integration tests)
         command: |
           mvn -P qulice,integration-tests clean install
-          mvn -Psonar sonar:sonar -Dsonar.organization=dgroup-github -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${SONAR_LOGIN}
           bash <(curl -s https://codecov.io/bash)
+          mvn -Psonar sonar:sonar -Dsonar.organization=dgroup-github -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${SONAR_LOGIN}
 
 workflows:
   version: 2
