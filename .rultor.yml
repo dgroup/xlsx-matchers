@@ -16,8 +16,8 @@ readers:
 #  https://danielkummer.github.io/git-flow-cheatsheet/index.html
 assets:
   settings.xml: "dgroup/ossrh#settings.xml"
-  pubring.gpg:  "dgroup/ossrh#8F0C7E69-mbox4j-pubring.gpg"
-  secring.gpg:  "dgroup/ossrh#8F0C7E69-mbox4j-secring.gpg"
+  pubring.gpg:  "dgroup/ossrh#D0A04C1B_xlsx-matchers_pubring.gpg"
+  secring.gpg:  "dgroup/ossrh#D0A04C1B_xlsx-matchers_secring.gpg"
 
 merge:
   env:
