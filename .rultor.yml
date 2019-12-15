@@ -30,4 +30,4 @@ release:
     mvn versions:set "-DnewVersion=${tag}"
     git add pom.xml
     git commit -am "${tag}"
-    mvn -X -V -Dgpg.homedir="$HOME" -P qulice,ossrh-mbox4j -s ../settings.xml clean deploy
+    mvn -X -V -Dgpg.homedir="$HOME" -P qulice,ossrh-xlsx-matchers -s ../settings.xml clean deploy
