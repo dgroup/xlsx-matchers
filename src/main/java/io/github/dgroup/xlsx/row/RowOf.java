@@ -22,9 +22,9 @@
  * OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package io.github.dgroup.poi.row;
+package io.github.dgroup.xlsx.row;
 
-import io.github.dgroup.poi.cell.MutableCell;
+import io.github.dgroup.xlsx.cell.MutableCell;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;

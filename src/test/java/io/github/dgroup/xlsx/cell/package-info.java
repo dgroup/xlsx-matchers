@@ -23,8 +23,8 @@
  */
 
 /**
- * The classes for unit-testing of Apache POI cell(s).
+ * Unit tests for the package {@link io.github.dgroup.xlsx.cell}.
  *
  * @since 0.1.0
  */
-package io.github.dgroup.poi.cell;
+package io.github.dgroup.xlsx.cell;

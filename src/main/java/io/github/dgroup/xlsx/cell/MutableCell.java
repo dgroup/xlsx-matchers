@@ -22,44 +22,21 @@
  * OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package io.github.dgroup.poi.cell;
+package io.github.dgroup.xlsx.cell;
 
-import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.junit.Test;
-import org.llorllale.cactoos.matchers.Assertion;
-import org.llorllale.cactoos.matchers.Matches;
 
 /**
- * Test case for {@link HasCells}.
+ * An excel cell which may change the cell value for particular row.
  *
+ * @param <T> The type of excel cell.
  * @since 0.1.0
- * @checkstyle MethodBodyCommentsCheck (500 lines)
  */
-@SuppressWarnings("PMD.AvoidDuplicateLiterals")
-public class HasCellsTest {
+public interface MutableCell<T> extends Cell<T> {
 
-    @Test
-    public void matches() {
-        // Testing prerequisites
-        final XSSFRow row = new XSSFWorkbook().createSheet().createRow(1);
-        final XSSFCell name = row.createCell(0);
-        name.setCellValue("Name");
-        final XSSFCell birth = row.createCell(1);
-        birth.setCellValue("Birth");
-        final XSSFCell phone = row.createCell(2);
-        phone.setCellValue("Phone");
-        // Testing ...
-        new Assertion<>(
-            "The mather matches row with all required cells",
-            new HasCells<>(
-                new CellOf<>(0, "Name"),
-                new CellOf<>(1, "Birth"),
-                new CellOf<>(2, "Phone")
-            ),
-            new Matches<>(row)
-        ).affirm();
-    }
-
+    /**
+     * Change the cell value based on type.
+     * @param row Excel row to modify.
+     */
+    void change(XSSFRow row);
 }

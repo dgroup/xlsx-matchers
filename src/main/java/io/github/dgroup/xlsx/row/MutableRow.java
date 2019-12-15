@@ -22,9 +22,20 @@
  * OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+package io.github.dgroup.xlsx.row;
+
+import io.github.dgroup.xlsx.cell.MutableCell;
+
 /**
- * Unit tests for the package {@link io.github.dgroup.poi.cell}.
+ * An excel row which may change the cell(s) value for within particular row.
  *
  * @since 0.1.0
  */
-package io.github.dgroup.poi.cell;
+public interface MutableRow extends Row {
+
+    /**
+     * Change value of particular cell within the current row.
+     * @param cell The cell to change.
+     */
+    void change(MutableCell cell);
+}

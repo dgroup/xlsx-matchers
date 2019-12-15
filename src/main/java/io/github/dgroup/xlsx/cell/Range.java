@@ -22,7 +22,7 @@
  * OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package io.github.dgroup.poi.cell;
+package io.github.dgroup.xlsx.cell;
 
 import java.util.List;
 import java.util.Objects;

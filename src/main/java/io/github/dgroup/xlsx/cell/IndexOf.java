@@ -22,21 +22,51 @@
  * OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package io.github.dgroup.poi.row;
+package io.github.dgroup.xlsx.cell;
 
-import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.cactoos.Scalar;
 
 /**
- * A singe excel row.
- *
+ * Give excel column id by text representation.
+ * {@code
+ *    final int a = new IndexOf("A").value();   // where a is equal to 'A' excel column id
+ *    final int az = new IndexOf("AZ").value(); // where az is equal to 'AZ' excel column id
+ * }
  * @since 0.1.0
  */
-public interface Row extends Scalar<XSSFRow> {
+public final class IndexOf implements Scalar<Integer> {
 
     /**
-     * The Apache POI row.
-     * @return The row.
+     * Count of symbols within English alphabet.
      */
-    XSSFRow value();
+    private static final int ENGLISH_ALPHABET = 26;
+
+    /**
+     * First excel columns has index starting from 0,
+     *  thus alphabet should start from 'symbol - 1'.
+     */
+    private static final int EXCEL_INDEX_SHIFT = 1;
+
+    /**
+     * The label of excel column.
+     */
+    private final String column;
+
+    /**
+     * Ctor.
+     * @param column The label of excel column like 'A', 'Z', 'AX', etc.
+     */
+    public IndexOf(final String column) {
+        this.column = column;
+    }
+
+    @Override
+    public Integer value() {
+        int result = 0;
+        for (int idx = 0; idx < this.column.length(); ++idx) {
+            result *= IndexOf.ENGLISH_ALPHABET;
+            result += this.column.charAt(idx) - 'A' + 1;
+        }
+        return result - IndexOf.EXCEL_INDEX_SHIFT;
+    }
 }

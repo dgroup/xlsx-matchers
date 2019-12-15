@@ -22,9 +22,29 @@
  * OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+package io.github.dgroup.xlsx.cell;
+
+import org.cactoos.Scalar;
+
 /**
- * The classes for unit-testing of Apache POI row(s).
+ * The excel cell.
+ *
+ * @param <T> The type of excel cell.
+ * @see CellOf
  *
  * @since 0.1.0
  */
-package io.github.dgroup.poi.row;
+public interface Cell<T> extends Scalar<T> {
+
+    /**
+     * The cell column id (starts from 0).
+     * @return The column id.
+     */
+    int index();
+
+    /**
+     * The cell value.
+     * @return The value.
+     */
+    T value();
+}
