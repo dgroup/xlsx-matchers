@@ -4,8 +4,6 @@ architect:
 readers:
   - "urn:github:1651114"
 
-# @todo #/DEV Enable Rultor for project.
-
 # @todo #/DEV Configure the deployment to staging environment in order to work with RC
 #  https://help.sonatype.com/repomanager2/staging-releases/staging-overview
 #  https://help.sonatype.com/repomanager2/staging-releases/configuring-your-project-for-deployment
