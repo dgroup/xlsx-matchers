@@ -5,8 +5,8 @@
 
 [![Build Status](https://circleci.com/gh/dgroup/xlsx-matchers.svg?style=svg&circle-token=a1104cecfe0dfd20fc91aa7b6a809c28b87cbbd7)](https://circleci.com/gh/dgroup/xlsx-matchers)
 [![0pdd](http://www.0pdd.com/svg?name=dgroup/xlsx-matchers)](http://www.0pdd.com/p?name=dgroup/xlsx-matchers)
-[![Dependency Status](https://requires.io/github/dgroup/xlsx-matchers/requirements.svg?branch=master)](https://requires.io/github/dgroup/xlsx-matchers/requirements/?branch=master)
-[![Known Vulnerabilities](https://snyk.io/test/github/dgroup/xlsx-matchers/badge.svg)](https://snyk.io/org/dgroup/project/!!!!!!<TBD>!!!!!!!/?tab=dependencies&vulns=vulnerable)
+[![Dependencies Status](https://requires.io/github/dgroup/xlsx-matchers/requirements.svg?branch=master)](https://requires.io/github/dgroup/xlsx-matchers/requirements/?branch=master)
+[![Known Vulnerabilities](https://snyk.io/test/github/dgroup/xlsx-matchers/badge.svg)](https://snyk.io/test/github/dgroup/xlsx-matchers)
 
 [![DevOps By Rultor.com](http://www.rultor.com/b/dgroup/xlsx-matchers)](http://www.rultor.com/p/dgroup/xlsx-matchers)
 [![EO badge](http://www.elegantobjects.org/badge.svg)](http://www.elegantobjects.org/#principles)
