@@ -1,36 +1,36 @@
-[![Maven](https://img.shields.io/maven-central/v/io.github.dgroup/mbox4j.svg)](https://mvnrepository.com/artifact/io.github.dgroup/mbox4j)
-[![Javadocs](http://www.javadoc.io/badge/io.github.dgroup/mbox4j.svg)](http://www.javadoc.io/doc/io.github.dgroup/mbox4j)
+[![Maven](https://img.shields.io/maven-central/v/io.github.dgroup/xlsx-matchers.svg)](https://mvnrepository.com/artifact/io.github.dgroup/xlsx-matchers)
+[![Javadocs](http://www.javadoc.io/badge/io.github.dgroup/xlsx-matchers.svg)](http://www.javadoc.io/doc/io.github.dgroup/xlsx-matchers)
 [![License: MIT](https://img.shields.io/github/license/mashape/apistatus.svg)](./license.txt)
-[![Commit activity](https://img.shields.io/github/commit-activity/y/dgroup/mbox4j.svg?style=flat-square)](https://github.com/dgroup/mbox4j/graphs/commit-activity)
+[![Commit activity](https://img.shields.io/github/commit-activity/y/dgroup/xlsx-matchers.svg?style=flat-square)](https://github.com/dgroup/xlsx-matchers/graphs/commit-activity)
 
-[![Build Status](https://circleci.com/gh/dgroup/mbox4j.svg?style=svg)](https://circleci.com/gh/dgroup/mbox4j)
-[![0pdd](http://www.0pdd.com/svg?name=dgroup/mbox4j)](http://www.0pdd.com/p?name=dgroup/mbox4j)
-[![Dependency Status](https://requires.io/github/dgroup/mbox4j/requirements.svg?branch=master)](https://requires.io/github/dgroup/mbox4j/requirements/?branch=master)
-[![Known Vulnerabilities](https://snyk.io/test/github/dgroup/mbox4j/badge.svg)](https://snyk.io/org/dgroup/project/3bd606b4-323a-4a5e-a9cf-8fe847b7f94d/?tab=dependencies&vulns=vulnerable)
+[![Build Status](https://circleci.com/gh/dgroup/xlsx-matchers.svg?style=svg&circle-token=a1104cecfe0dfd20fc91aa7b6a809c28b87cbbd7)](https://circleci.com/gh/dgroup/xlsx-matchers)
+[![0pdd](http://www.0pdd.com/svg?name=dgroup/xlsx-matchers)](http://www.0pdd.com/p?name=dgroup/xlsx-matchers)
+[![Dependency Status](https://requires.io/github/dgroup/xlsx-matchers/requirements.svg?branch=master)](https://requires.io/github/dgroup/xlsx-matchers/requirements/?branch=master)
+[![Known Vulnerabilities](https://snyk.io/test/github/dgroup/xlsx-matchers/badge.svg)](https://snyk.io/org/dgroup/project/!!!!!!<TBD>!!!!!!!/?tab=dependencies&vulns=vulnerable)
 
-[![DevOps By Rultor.com](http://www.rultor.com/b/dgroup/mbox4j)](http://www.rultor.com/p/dgroup/mbox4j)
+[![DevOps By Rultor.com](http://www.rultor.com/b/dgroup/xlsx-matchers)](http://www.rultor.com/p/dgroup/xlsx-matchers)
 [![EO badge](http://www.elegantobjects.org/badge.svg)](http://www.elegantobjects.org/#principles)
 [![We recommend IntelliJ IDEA](http://www.elegantobjects.org/intellij-idea.svg)](https://www.jetbrains.com/idea/)
 
 [![Qulice](https://img.shields.io/badge/qulice-passed-blue.svg)](http://www.qulice.com/)
-[![SQ maintainability](https://sonarcloud.io/api/project_badges/measure?project=io.github.dgroup%3Ambox4j&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=io.github.dgroup%3Ambox4j)
-[![Codebeat](https://codebeat.co/badges/03a70479-61fe-4167-bf43-84dfd78d4cc0)](https://codebeat.co/projects/github-com-dgroup-mbox4j-master)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/e72eb423424b4b6db9ba64aa97463206)](https://www.codacy.com/app/dgroup/mbox4j?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=dgroup/mbox4j&amp;utm_campaign=Badge_Grade)
-[![Codecov](https://codecov.io/gh/dgroup/mbox4j/branch/master/graph/badge.svg)](https://codecov.io/gh/dgroup/mbox4j)
+[![SQ maintainability](https://sonarcloud.io/api/project_badges/measure?project=io.github.dgroup%3Axlsx-matchers&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=io.github.dgroup%3Axlsx-matchers)
+[![Codebeat](https://codebeat.co/badges/03a70479-61fe-4167-bf43-84dfd78d4cc0)](https://codebeat.co/projects/github-com-dgroup-xlsx-matchers-master)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/e72eb423424b4b6db9ba64aa97463206)](https://www.codacy.com/app/dgroup/xlsx-matchers?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=dgroup/xlsx-matchers&amp;utm_campaign=Badge_Grade)
+[![Codecov](https://codecov.io/gh/dgroup/xlsx-matchers/branch/master/graph/badge.svg)](https://codecov.io/gh/dgroup/xlsx-matchers)
 
 ## What it is
-**mbox4j** is an object-oriented primitives to simplify the manipulations with emails for Java-based applications.
+**xlsx-matchers** is an elegant object-oriented hamcrest matchers for Apache POI.
 
 ## Principles
-[Design principles](http://www.elegantobjects.org#principles) behind mbox4j.
+[Design principles](http://www.elegantobjects.org#principles) behind xlsx-matchers.
 
 ## How to use
-Get the latest version [here](https://github.com/dgroup/mbox4j/releases):
+Get the latest version [here](https://github.com/dgroup/xlsx-matchers/releases):
 
 ```xml
 <dependency>
     <groupId>io.github.dgroup</groupId>
-    <artifactId>mbox4j</artifactId>
+    <artifactId>xlsx-matchers</artifactId>
     <version>${version}</version>
 </dependency>
 ```
@@ -69,7 +69,7 @@ public static void main(final String[] args) {
     }
 }
 ```
-See [Gmail](src/test/java/io/github/dgroup/mbox4j/GmailSmtpProperties.java) SMTP connection properties as an example of a configuration for reading procedure.
+See [Gmail](src/test/java/io/github/dgroup/xlsx-matchers/GmailSmtpProperties.java) SMTP connection properties as an example of a configuration for reading procedure.
 ### [Outbox](src/main/java/io/github/dgroup/poi/Outbox.java)
 #### [JavaxMailOutbox](src/main/java/io/github/dgroup/poi/outbox/javax/JavaxMailInboxTest.java)
 Send an email to the target recipients using `javax.mail` framework:
@@ -92,4 +92,4 @@ public static void main(final String[] args) {
     );
 }
 ```
-See [Gmail](src/test/java/io/github/dgroup/mbox4j/GmailSmtpProperties.java) SMTP connection properties as an example of a configuration for sending procedure. 
+See [Gmail](src/test/java/io/github/dgroup/xlsx-matchers/GmailSmtpProperties.java) SMTP connection properties as an example of a configuration for sending procedure. 

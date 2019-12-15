@@ -20,7 +20,7 @@ jobs:
     - run:
         name: Build java sources (including integration tests)
         command: |
-          mvn -P qulice,integration-tests clean install -DLL.yandex.user=${EMAIL_USER} -DLL.yandex.pass=${EMAIL_PASS} -DLL.yandex.to.user=${EMAIL_TO}
+          mvn -P qulice,integration-tests clean install
           mvn -Psonar sonar:sonar -Dsonar.organization=dgroup-github -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${SONAR_LOGIN}
           bash <(curl -s https://codecov.io/bash)
 
