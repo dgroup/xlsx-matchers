@@ -24,18 +24,14 @@
 
 package io.github.dgroup.xlsx.cell;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.Date;
 import java.util.Objects;
-import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.cactoos.Func;
+import org.cactoos.Proc;
 import org.cactoos.Scalar;
-import org.cactoos.func.UncheckedFunc;
+import org.cactoos.func.UncheckedProc;
 import org.cactoos.scalar.Sticky;
 import org.cactoos.scalar.Unchecked;
 
@@ -59,14 +55,14 @@ public class CellOf<T> implements MutableCell<T> {
     private final Unchecked<T> val;
 
     /**
-     * The function to detect the cell's format from particular {@link XSSFSheet}.
-     */
-    private final UncheckedFunc<XSSFSheet, XSSFCellStyle> style;
-
-    /**
      * The function to evaluate the cell description.
      */
     private final Unchecked<String> tostr;
+
+    /**
+     * Procedure to change the cell value.
+     */
+    private final UncheckedProc<XSSFRow> mutate;
 
     /**
      * Ctor.
@@ -110,7 +106,9 @@ public class CellOf<T> implements MutableCell<T> {
      * @param val The excel cell value.
      */
     public CellOf(final Scalar<Integer> cid, final Scalar<T> val) {
-        this(cid, val, sheet -> sheet.getWorkbook().createCellStyle());
+        this(cid, val, sheet -> {
+            return sheet.getWorkbook().createCellStyle();
+        });
     }
 
     /**
@@ -122,9 +120,19 @@ public class CellOf<T> implements MutableCell<T> {
     protected CellOf(
         final Scalar<Integer> cid, final Scalar<T> val, final Func<XSSFSheet, XSSFCellStyle> style
     ) {
+        this(cid, val, new Change<>(cid, val, style));
+    }
+
+    /**
+     * Ctor.
+     * @param cid The number of excel cell.
+     * @param val Excel cell value.
+     * @param mutate Procedure to change the cell value.
+     */
+    protected CellOf(final Scalar<Integer> cid, final Scalar<T> val, final Proc<XSSFRow> mutate) {
         this.cid = new Unchecked<>(new Sticky<>(cid));
         this.val = new Unchecked<>(new Sticky<>(val));
-        this.style = new UncheckedFunc<>(style);
+        this.mutate = new UncheckedProc<>(mutate);
         this.tostr = new Unchecked<>(
             new Sticky<>(
                 () -> String.format("Cell %s, %s.", this.cid, this.val.value())
@@ -169,46 +177,6 @@ public class CellOf<T> implements MutableCell<T> {
 
     @Override
     public final void change(final XSSFRow row) {
-        if (row != null) {
-            XSSFCell cell = row.getCell(this.index());
-            if (cell == null) {
-                cell = row.createCell(this.index());
-                cell.setCellStyle(this.style.apply(row.getSheet()));
-            }
-            final T value = this.value();
-            if (value instanceof Double) {
-                cell.setCellValue(
-                    Math.round(
-                        (Double) value
-                    )
-                );
-            }
-            if (value instanceof Integer) {
-                cell.setCellValue((Integer) value);
-            }
-            if (value instanceof Long) {
-                cell.setCellValue((Long) value);
-            }
-            if (value instanceof String) {
-                cell.setCellValue((String) value);
-            }
-            if (value instanceof LocalDateTime) {
-                final Date date = Date.from(
-                    ((LocalDateTime) value)
-                        .atZone(ZoneId.systemDefault())
-                        .toInstant()
-                );
-                cell.setCellValue(date);
-            }
-            if (value instanceof LocalDate) {
-                final Date date = Date.from(
-                    ((LocalDate) value)
-                        .atStartOfDay()
-                        .atZone(ZoneId.systemDefault())
-                        .toInstant()
-                );
-                cell.setCellValue(date);
-            }
-        }
+        this.mutate.exec(row);
     }
 }
