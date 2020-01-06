@@ -2,6 +2,7 @@
 [![Javadocs](http://www.javadoc.io/badge/io.github.dgroup/xlsx-matchers.svg)](http://www.javadoc.io/doc/io.github.dgroup/xlsx-matchers)
 [![License: MIT](https://img.shields.io/github/license/mashape/apistatus.svg)](./license.txt)
 [![Commit activity](https://img.shields.io/github/commit-activity/y/dgroup/xlsx-matchers.svg?style=flat-square)](https://github.com/dgroup/xlsx-matchers/graphs/commit-activity)
+[![Hits-of-Code](https://hitsofcode.com/github/dgroup/xlsx-matchers)](https://hitsofcode.com/view/github/dgroup/xlsx-matchers)
 
 [![Build Status](https://circleci.com/gh/dgroup/xlsx-matchers.svg?style=svg&circle-token=a1104cecfe0dfd20fc91aa7b6a809c28b87cbbd7)](https://circleci.com/gh/dgroup/xlsx-matchers)
 [![0pdd](http://www.0pdd.com/svg?name=dgroup/xlsx-matchers)](http://www.0pdd.com/p?name=dgroup/xlsx-matchers)
