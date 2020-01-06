@@ -33,6 +33,7 @@ import org.cactoos.scalar.Unchecked;
 
 /**
  * Represents a single excel row from particular excel sheet.
+ * Creates a new row in case if row doesn't exist.
  *
  * @see XSSFSheet
  * @see XSSFRow
@@ -49,6 +50,15 @@ public final class RowOf implements MutableRow {
      * The excel index of particular row.
      */
     private final Unchecked<Integer> rowid;
+
+    /**
+     * Ctor.
+     * @param sheet The Apache POI sheet.
+     * @param rowid The excel index of particular row.
+     */
+    public RowOf(final XSSFSheet sheet, final Integer rowid) {
+        this(sheet, () -> rowid);
+    }
 
     /**
      * Ctor.

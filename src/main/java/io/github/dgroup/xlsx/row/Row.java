@@ -35,7 +35,7 @@ import org.cactoos.Scalar;
 public interface Row extends Scalar<XSSFRow> {
 
     /**
-     * The Apache POI row.
+     * Gives Apache POI row.
      * @return The row.
      */
     XSSFRow value();
