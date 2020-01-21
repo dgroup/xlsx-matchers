@@ -28,7 +28,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>io.github.dgroup</groupId>
   <artifactId>xlsx-matchers</artifactId>
-  <version>0.0.0</version>
+  <version>0.2.1</version>
   <packaging>jar</packaging>
   <name>${project.artifactId}</name>
   <description>Elegant object-oriented hamcrest matchers for Apache POI.</description>
