@@ -24,10 +24,10 @@
 
 package io.github.dgroup.xlsx.cell;
 
+import io.github.dgroup.xlsx.style.Style;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.cactoos.Scalar;
 import org.cactoos.scalar.Sticky;
 
@@ -48,7 +48,8 @@ public final class DateOf extends CellOf<LocalDate> {
             () -> cell.getDateCellValue()
                 .toInstant()
                 .atZone(ZoneId.systemDefault())
-                .toLocalDate()
+                .toLocalDate(),
+            (sheet, actual) -> actual.setCellStyle(cell.getCellStyle())
         );
     }
 
@@ -56,54 +57,39 @@ public final class DateOf extends CellOf<LocalDate> {
      * Ctor.
      * @param cid The number of excel cell.
      * @param val The excel cell value.
+     * @param styling The procedure to apply the style to the excel cell.
      */
-    public DateOf(final int cid, final LocalDate val) {
-        this(() -> cid, () -> val);
+    public DateOf(final int cid, final LocalDate val, final Style styling) {
+        this(() -> cid, () -> val, styling);
     }
 
     /**
      * Ctor.
      * @param cid The number of excel cell.
      * @param val The excel cell value.
+     * @param styling The procedure to apply the style to the excel cell.
      */
-    public DateOf(final String cid, final LocalDate val) {
-        this(cid, () -> val);
+    public DateOf(final String cid, final LocalDate val, final Style styling) {
+        this(cid, () -> val, styling);
     }
 
     /**
      * Ctor.
      * @param cid The number of excel cell.
      * @param val The excel cell value.
+     * @param styling The procedure to apply the style to the excel cell.
      */
-    public DateOf(final String cid, final Scalar<LocalDate> val) {
-        this(new Sticky<>(new IndexOf(cid)), val);
+    public DateOf(final String cid, final Scalar<LocalDate> val, final Style styling) {
+        this(new Sticky<>(new IndexOf(cid)), val, styling);
     }
 
     /**
      * Ctor.
      * @param cid The number of excel cell.
      * @param val The excel cell value.
+     * @param styling The procedure to apply the style to the excel cell.
      */
-    public DateOf(final Scalar<Integer> cid, final Scalar<LocalDate> val) {
-        this(cid, val, "yyyy-mm-dd");
-    }
-
-    /**
-     * Ctor.
-     * @param cid The number of excel cell.
-     * @param val The excel cell value.
-     * @param pattern The format of the date for target {@link XSSFCell}.
-     */
-    public DateOf(final Scalar<Integer> cid, final Scalar<LocalDate> val, final String pattern) {
-        super(cid, val, sheet -> {
-            final XSSFCellStyle date = sheet.getWorkbook().createCellStyle();
-            date.setDataFormat(
-                sheet.getWorkbook()
-                    .getCreationHelper()
-                    .createDataFormat()
-                    .getFormat(pattern)
-            );
-            return date;
-        });
+    public DateOf(final Scalar<Integer> cid, final Scalar<LocalDate> val, final Style styling) {
+        super(cid, val, styling);
     }
 }

@@ -24,11 +24,11 @@
 
 package io.github.dgroup.xlsx.cell;
 
+import io.github.dgroup.xlsx.style.Style;
+import io.github.dgroup.xlsx.style.StyleOf;
 import java.util.Objects;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.cactoos.Func;
 import org.cactoos.Proc;
 import org.cactoos.Scalar;
 import org.cactoos.func.UncheckedProc;
@@ -106,21 +106,27 @@ public class CellOf<T> implements MutableCell<T> {
      * @param val The excel cell value.
      */
     public CellOf(final Scalar<Integer> cid, final Scalar<T> val) {
-        this(cid, val, sheet -> {
-            return sheet.getWorkbook().createCellStyle();
-        });
+        this(cid, val, new Style.No());
     }
 
     /**
      * Ctor.
      * @param cid The number of excel cell.
      * @param val The excel cell value.
-     * @param style The excel cell formatting style.
+     * @param style The style of excel cell.
      */
-    protected CellOf(
-        final Scalar<Integer> cid, final Scalar<T> val, final Func<XSSFSheet, XSSFCellStyle> style
-    ) {
-        this(cid, val, new Change<>(cid, val, style));
+    public CellOf(final Scalar<Integer> cid, final Scalar<T> val, final XSSFCellStyle style) {
+        this(cid, val, new StyleOf(style));
+    }
+
+    /**
+     * Ctor.
+     * @param cid The number of excel cell.
+     * @param val The excel cell value.
+     * @param styling The procedure to apply the style to the excel cell.
+     */
+    public CellOf(final Scalar<Integer> cid, final Scalar<T> val, final Style styling) {
+        this(cid, val, new Change<>(cid, val, styling));
     }
 
     /**

@@ -24,18 +24,15 @@
 
 package io.github.dgroup.xlsx.cell;
 
+import io.github.dgroup.xlsx.style.Style;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.cactoos.Func;
 import org.cactoos.Proc;
 import org.cactoos.Scalar;
-import org.cactoos.func.UncheckedFunc;
 import org.cactoos.scalar.Unchecked;
 
 /**
@@ -59,22 +56,22 @@ public final class Change<T> implements Proc<XSSFRow> {
     /**
      * Function to evaluate formatting style of the cell in Excel row.
      */
-    private final UncheckedFunc<XSSFSheet, XSSFCellStyle> style;
+    private final Style styling;
 
     /**
      * Ctor.
      * @param cid The number of cell in Excel row.
      * @param val The value of cell in Excel row.
-     * @param style Function to evaluate formatting style of the cell in Excel row.
+     * @param styling The procedure to apply the style to the excel cell.
      */
     public Change(
         final Scalar<Integer> cid,
         final Scalar<T> val,
-        final Func<XSSFSheet, XSSFCellStyle> style
+        final Style styling
     ) {
         this.index = new Unchecked<>(cid);
         this.val = new Unchecked<>(val);
-        this.style = new UncheckedFunc<>(style);
+        this.styling = styling;
     }
 
     @Override
@@ -83,7 +80,7 @@ public final class Change<T> implements Proc<XSSFRow> {
             XSSFCell cell = row.getCell(this.index.value());
             if (cell == null) {
                 cell = row.createCell(this.index.value());
-                cell.setCellStyle(this.style.apply(row.getSheet()));
+                this.styling.exec(row.getSheet(), cell);
             }
             final T value = this.val.value();
             if (value instanceof Double) {

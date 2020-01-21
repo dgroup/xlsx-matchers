@@ -24,6 +24,7 @@
 
 package io.github.dgroup.xlsx.cell;
 
+import io.github.dgroup.xlsx.style.Style;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -61,6 +62,11 @@ public final class Range<T> implements MutableCell<List<T>> {
     private final Unchecked<String> tostr;
 
     /**
+     * The procedure to apply the style to the excel cell.
+     */
+    private final Style styling;
+
+    /**
      * Ctor.
      * @param cid The number of excel column number.
      * @param values The cell(s) values.
@@ -75,7 +81,7 @@ public final class Range<T> implements MutableCell<List<T>> {
      * @param values The cell(s) values.
      */
     public Range(final int cid, final List<T> values) {
-        this(() -> cid, values);
+        this(() -> cid, values, new Style.No());
     }
 
     /**
@@ -83,6 +89,7 @@ public final class Range<T> implements MutableCell<List<T>> {
      * @param cid The name of excel column number.
      * @param values The cell(s) values.
      */
+    @SafeVarargs
     public Range(final String cid, final T... values) {
         this(cid, new ListOf<>(values));
     }
@@ -93,17 +100,19 @@ public final class Range<T> implements MutableCell<List<T>> {
      * @param values The cell(s) values.
      */
     public Range(final String cid, final List<T> values) {
-        this(new Sticky<>(new IndexOf(cid)), values);
+        this(new Sticky<>(new IndexOf(cid)), values, new Style.No());
     }
 
     /**
      * Ctor.
      * @param cid The number of excel column number.
      * @param values The cell(s) values.
+     * @param styling The procedure to apply the style to the excel cell.
      */
-    public Range(final Scalar<Integer> cid, final List<T> values) {
+    public Range(final Scalar<Integer> cid, final List<T> values, final Style styling) {
         this.cid = new Unchecked<>(cid);
         this.values = values;
+        this.styling = styling;
         this.tostr = new Unchecked<>(
             new Sticky<>(
                 () -> String.format(
@@ -119,7 +128,7 @@ public final class Range<T> implements MutableCell<List<T>> {
     public void change(final XSSFRow row) {
         final AtomicInteger column = new AtomicInteger(this.index());
         for (final T val : this.values) {
-            new CellOf<>(column.getAndIncrement(), val)
+            new CellOf<>(column::getAndIncrement, () -> val, this.styling)
                 .change(row);
         }
     }

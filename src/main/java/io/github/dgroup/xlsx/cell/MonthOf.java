@@ -24,9 +24,12 @@
 
 package io.github.dgroup.xlsx.cell;
 
+import io.github.dgroup.xlsx.style.Style;
+import io.github.dgroup.xlsx.style.StyleOf;
 import java.time.YearMonth;
 import java.time.format.TextStyle;
 import java.util.Locale;
+import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.cactoos.scalar.Sticky;
 
 /**
@@ -42,6 +45,30 @@ public final class MonthOf extends CellOf<String> {
      * @param month The cell value.
      */
     public MonthOf(final int cid, final YearMonth month) {
-        super(cid, new Sticky<>(() -> month.getMonth().getDisplayName(TextStyle.SHORT, Locale.US)));
+        this(cid, month, new Style.No());
+    }
+
+    /**
+     * Ctor.
+     * @param cid The number of excel column number.
+     * @param month The cell value.
+     * @param style The style of excel cell.
+     */
+    public MonthOf(final int cid, final YearMonth month, final XSSFCellStyle style) {
+        this(cid, month, new StyleOf(style));
+    }
+
+    /**
+     * Ctor.
+     * @param cid The number of excel column number.
+     * @param month The cell value.
+     * @param styling The procedure to apply the style to the excel cell.
+     */
+    public MonthOf(final int cid, final YearMonth month, final Style styling) {
+        super(
+            () -> cid,
+            new Sticky<>(() -> month.getMonth().getDisplayName(TextStyle.SHORT, Locale.US)),
+            styling
+        );
     }
 }
