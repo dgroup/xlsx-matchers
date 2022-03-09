@@ -87,7 +87,7 @@
     <hamcrest-all.version>1.3</hamcrest-all.version>
     <junit.version>4.12</junit.version>
     <junit-dataprovider.version>1.13.1</junit-dataprovider.version>
-    <cactoos-matchers.version>0.17</cactoos-matchers.version>
+    <cactoos-matchers.version>0.25</cactoos-matchers.version>
     <!-- Code quality -->
     <code.cvrg.classes-without-tests>20</code.cvrg.classes-without-tests>
     <code.cvrg.instructions>0.0</code.cvrg.instructions>
